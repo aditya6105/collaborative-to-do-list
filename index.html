@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collaborative To-Do List</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Firebase App (v8.x.x SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Firebase Analytics SDK (v8.x.x) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <!-- Firebase Realtime Database SDK (v8.x.x) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="todo-app">
+        <h2>Collaborative To-Do List</h2>
+        <div class="row">
+          <input type="text" id="input-box" placeholder="Add a task" />
+          <button>Add</button>
+        </div>
+        <ul id="list-container"></ul>
+      </div>
+    </div>
+
+    <!-- Firebase Initialization -->
+    <script>
+      // Your Firebase configuration with updated database URL
+      const firebaseConfig = {
+        apiKey: "AIzaSyBAHfLIgzO-KLKKGf1ve6Jz_JcH5_26o0Q",
+        authDomain: "to-do-list-2a632.firebaseapp.com",
+        databaseURL:
+          "https://to-do-list-2a632-default-rtdb.asia-southeast1.firebasedatabase.app", // UPDATED URL
+        projectId: "to-do-list-2a632",
+        storageBucket: "to-do-list-2a632.appspot.com",
+        messagingSenderId: "776123083157",
+        appId: "1:776123083157:web:2e672d23b65b884828ae9c",
+        measurementId: "G-XEBD5VC3HR",
+      };
+
+      // Initialize Firebase after the window has fully loaded
+      window.onload = function () {
+        const app = firebase.initializeApp(firebaseConfig); // Firebase initialization
+        const analytics = firebase.analytics(); // Optional: Initialize analytics
+        const db = firebase.database(); // Initialize the database
+        window.db = db; // Make db globally accessible
+
+        // Once Firebase is initialized, attach the event listener for the "Add" button
+        const addButton = document.querySelector("button");
+        addButton.addEventListener("click", addTask);
+
+        // Listen for real-time updates for the task list
+        listenForTasks();
+      };
+    </script>
+
+    <!-- Main functionality script -->
+    <script src="script.js"></script>
+  </body>
+</html>
